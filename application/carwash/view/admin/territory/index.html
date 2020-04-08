@@ -1,0 +1,123 @@
+{extend name="layout" /}
+
+{block name="plugins-css"}
+<link href="__LIBS__/jquery-nestable/jquery.nestable.css" rel="stylesheet" type="text/css" />
+{/block}
+
+{block name="content"}
+<div class="row data-table-toolbar">
+    <div class="col-sm-12">
+        <div class="toolbar-btn-action">
+            <a title="新增" class="btn btn-primary" href="addCity?id=0"><i class="fa fa-plus-circle"></i> 新增</a>
+            <button title="展开所有节点" type="button" class="btn btn-success unfold" id="expand-all"><i class="fa fa-plus"></i> 展开所有节点</button>
+            <a title="收起所有节点" class="btn btn-warning" href="javascript:window.location.reload();"><i class="fa fa-minus"></i> 收起所有节点</a>
+        </div>
+    </div>
+</div>
+<!--  -->
+<div class="block-content tab-content">
+    <div class="dd" id="menu_list">
+        <ol class="dd-list">
+            {notempty name="lists"}
+                {volist name="lists" id="vo"}
+                    <li class="view" id="{$vo.id}" status="off" area_code="{$vo.area_code}">
+                        <div class="dd3-content"><i class="fa fa-fw fa-send"></i> {$vo.areaname} {$vo.area_code}<span class="link" id="{$vo.id}">
+                            <a href="javascript:(void);" class="low">查看下级</a> 
+                            <a href="javascript:(void);" class="edit">编辑</a>    
+                            <a href="javascript:(void);" class="delete">删除</a>    
+                            <a href="javascript:(void);" class="add" >新增</a>
+                            <a href="manageCity?id={$vo.id}">管理二级城市</a>
+                            </span>
+                        </div>
+                        <ul class="{$vo.area_code}" style="display:none;"></ul>
+                    </li>
+                {/volist}
+            {/notempty}
+        </ol>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script>
+   $(function(){
+        //    查看二级城市
+        $(".low").each(function(){
+            $(this).click(function(){
+                var status = $(this).parent().parent().parent()[0].getAttribute("status");
+                if(status == "on"){
+                    return false;
+                }
+                $(this).parent().parent().parent()[0].setAttribute('status', 'on');//修改为开启状态
+                $(this).parent().parent().parent().find("ul")[0].setAttribute('style', 'display:block');//显示隐藏的ul
+                var id = $(this).parent().parent().parent()[0].getAttribute("id");//一级城市id
+                var area_code = $(this).parent().parent().parent().find("ul")[0].getAttribute("class");//显示位置
+                $.post(
+                    "secondCity",
+                    {
+                        id:id
+                    },function(data){
+                        var jsonObj=eval("("+data+")");
+                        $.each(jsonObj, function (i, item) {
+                            $("."+area_code).append('<li><div class="dd3-content"><i class="fa fa-fw fa-send"></i>'+item.areaname+'&emsp;'+item.area_code+'</div></li>');
+                        });  
+                    }
+                );
+            });
+        });
+
+        // 编辑
+        $(".edit").each(function(){
+            $(this).click(function(){
+                var id = $(this).parent()[0].getAttribute("id");
+                window.location.href="editCity?id="+id;
+            });      
+        });
+
+        // 新增
+        $(".add").each(function(){
+            $(this).click(function(){
+                var id = $(this).parent()[0].getAttribute("id");
+                window.location.href="addCity?id="+id;
+            });      
+        });
+
+        // 删除
+        $(".delete").each(function(){
+            $(this).click(function(){
+                var id = $(this).parent()[0].getAttribute("id");
+                var r=confirm("确认删除吗?");
+                if (r==true){
+                    window.location.href="delcity?id="+id;
+                }
+            });      
+        });
+
+        // 展开所有
+        $(".unfold").click(function(){
+            // 循环取出所有父级节点
+            $(".view").each(function(i, item){
+                var status = $(this)[0].getAttribute("status");//显示状态
+                var area_code = $(this)[0].getAttribute("area_code");//显示位置
+                var id = item.id;
+                if(status == "on"){
+                    return false;
+                }
+                $(this)[0].setAttribute('status', 'on');//修改为开启状态
+                $(this).find("ul")[0].setAttribute('style', 'display:block');
+                $.post(
+                    "secondCity",
+                    {
+                        id:id
+                    },function(data){
+                        var jsonObj=eval("("+data+")");
+                        $.each(jsonObj, function (i, item) {
+                            $("."+area_code).append('<li><div class="dd3-content"><i class="fa fa-fw fa-send"></i>'+item.areaname+'&emsp;'+item.area_code+'</div></li>');
+                        });  
+                    }
+                );
+            });
+        });
+    });
+</script>
+{/block}

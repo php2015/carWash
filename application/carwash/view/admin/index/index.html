@@ -1,0 +1,116 @@
+{extend name="layout" /}
+
+{block name="plugins-css"}
+<link href="__LIBS__/jquery-nestable/jquery.nestable.css" rel="stylesheet" type="text/css" />
+{/block}
+
+{block name="content"}
+<style>
+    .content{
+        height:800px;background-color:darkgray;
+    }
+    .number li{
+        width:300px;height:200px;margin: 10px;float: left;cursor: pointer;
+        list-style-type:none;text-align: center;background-color: white;
+    }
+    .number,.manage{
+        display: inline-block;
+    }
+    h1{
+        line-height: 160px;color: black;
+    }
+    .manage img{
+        width:150px;height:100px;
+    }
+    .manage li{
+        width:150px;height:100px;margin: 30px;float: left;
+        list-style-type:none;text-align: center;cursor: pointer;
+    }
+    .manage li b{
+        font-size: large;font-weight: bold;color:black;line-height: 30px;
+    }
+    .hint{
+        width:20px;height: 20px;background-color: red;position: relative;top: 10px;left: 135px;border-radius:100%;
+    }
+    .hint span{color:white;}
+</style>
+<div class="content">
+    {notempty name="PlatformCount"}
+    <ul class="number">
+        <li>
+            <a href="{:url('user/index')}">
+                <h1>{$PlatformCount.countUserNum}</h1>
+                <h3>平台总用户数</h3>
+            </a>
+        </li>
+        <li>
+            <a href="{:url('seller/index')}">
+                <h1>{$PlatformCount.countSellerNum}</h1>
+                <h3>加盟商家</h3>
+            </a>
+        </li>
+        <li>
+            <a href="{:url('finance/finanlist')}">
+                <h1>{$PlatformCount.countSellerCasheNum}</h1>
+                <h3>总提现金额</h3>
+            </a>
+        </li>
+        <li>
+            <a href="{:url('user/history')}">
+                <h1>{$PlatformCount.countSellerConsumeNum}</h1>
+                <h3>总消费金额</h3>
+            </a>
+        </li>
+        <li>
+            <a href="{:url('finance/finanlist')}">
+                <h1>{$PlatformCount.countCashFee}</h1>
+                <h3>提现手续费统计</h3>
+            </a>
+        </li>
+    </ul>
+    {/notempty}
+    <!--  -->
+    <h3>待处理</h3>
+    <ul class="manage">
+        <li>
+            <a href="{:url('finance/finanlist')}">
+                <div class="hint" 
+                {notempty name="PlatformCount.countCashToDoFee"}
+                    style="opacity: 1;"><span>{$PlatformCount.countCashToDoFee}
+                        {else/}
+                    style="opacity: 0;"><span>
+                {/notempty}
+                </span></div>
+                <img src="/letter.jpg" alt="">
+                <b>待处理提现</b>
+            </a>
+        </li>
+        <li>
+            <a href="{:url('seller/index')}">
+                <div class="hint" 
+                {notempty name="PlatformCount.countToDoSeller"}
+                    style="opacity: 1;"><span>{$PlatformCount.countToDoSeller}
+                        {else/}
+                    style="opacity: 0;"><span>
+                {/notempty}
+                </span></div>
+                <img src="/letter.jpg" alt="">
+                <b>待审核商家</b>
+            </a>
+        </li>
+        <li>
+            <a href="{:url('seller_service/sellerservicelist')}">    
+                <div class="hint" 
+                {notempty name="PlatformCount.countToDoService"}
+                    style="opacity: 1;"><span>{$PlatformCount.countToDoService}
+                        {else/}
+                    style="opacity: 0;"><span>
+                {/notempty}
+                </span></div>
+                <img src="/letter.jpg" alt="">
+                <b>待审核服务</b>
+            </a>
+        </li>
+    </ul>
+</div>
+{/block}

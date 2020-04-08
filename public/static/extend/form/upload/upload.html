@@ -1,0 +1,57 @@
+<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 " id="form_group_{$name}">
+    <div class='img-show' style="margin: 20px 0 20px 0;" name="{$name}">
+    </div>
+    <label class="col-xs-12" for="$name}">{$config['title']|default ='未设置标题'}</label>
+    <div></div>
+    <div class="col-sm-12">
+        <button type='button' id="triggerBtn" class="pluginClass triggerBtn">上传</button>
+    </div>
+    <!-- 模态框 -->
+    <div id="myModal" class="modal myModal">
+        <input type="hidden" class="getPicArray" disabled="true" value={$path}>
+        <input type="hidden" class='config' name="config" value={$config|json_encode}>
+        <div class="modal-content">
+            <div class="title-header">
+                <span>{$config['title']|default ='未设置标题'}</span><span>最低分辨率{$config['width']|default ='0'}*{$config['height']|default ='0'}</span>
+            </div>
+
+            <div class="modal-body">
+                <div class="formBlock clone" style="display: none">
+                    <button type='button' class="remove pluginClass"></button>
+                    <input type="hidden" name="upload_number" value="" disabled="true"/>
+                    <div class="positive">
+                        <div class="ps-lf">
+                            <div class="pretty success circle smooth">
+                                <input type="radio" name="type" checked value="6">
+                                <label><i class="mdi mdi-check"></i>压缩</label>
+                            </div>
+                            <div class="pretty success circle smooth" style="margin-top: 70px">
+                                <input type="radio" name="type" value="2">
+                                <label><i class="mdi mdi-check"></i>补白</label>
+                            </div>
+                            <div class="pretty success circle smooth" style="margin-top: 75px">
+                                <input type="radio" name="type" value="3">
+                                <label><i class="mdi mdi-check"></i>截取</label>
+                            </div>
+                        </div>
+                        <div class="main-nav">
+                            <div class="previewa">
+                                <img class="bg" src=''/>
+                                <p class="sf">请选择图片</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="modal-footer">
+                <button type='button' id="addUploadDiv" class="pluginClass addUploadDiv">上传图片</button>
+                <button id="confirm" type='button' class="pluginClass confirm">确定</button>
+                <button id="cancel" type='button' class="pluginClass cancel">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

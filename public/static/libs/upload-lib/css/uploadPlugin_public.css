@@ -1,0 +1,195 @@
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 根据浏览器定位 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 全宽 */
+    height: 100%; /* 全高 */
+    overflow: auto; /* 允许滚动 */
+    background-color: rgba(0,0,0,0.4); /* 背景色 */
+}
+/*模态框内容*/
+.modal-content {
+  /*  display: flex;*/ /*采用flexbox布局*/
+   /* flex-direction: column; !*垂直排列*!*/
+    position: relative;
+    background-color: #fefefe;
+    margin: 5% auto; /*距顶部15% 水平居中*/
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height:80%;
+    animation: topDown 0.4s; /*自定义动画，从模态框内容上到下出现*/
+    /*overflow: auto;*/
+    left: 5%;
+}
+@keyframes topDown {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+#addUploadDiv{
+   display: inline-block;
+}
+.resolution{
+    background: none !important;
+    color: black !important;
+    width: 100%;
+    text-align: center;
+    width: 150px  !important;
+}
+/*模态框头部*/
+.modal-header {
+  /*  display: flex;*/ /*采用flexbox布局*/
+   /* flex-direction: row;*/ /*水平布局*/
+    align-items: center; /*内容垂直居中*/
+    justify-content: space-between;
+    overflow: hidden;
+    width: 100%;
+    float: left;
+    margin-top: 2%;
+    /*text-align: center;*/
+}
+.title-header{
+    border-bottom: 1px solid;
+    width: 100%;
+    overflow: hidden;
+}
+.remove{
+    background: url('../img/remove.png');
+    padding: 0px !important;
+    width: 25px !important;
+    height: 25px !important;
+    background-color: #fff !important;
+    background-size: 100% 100%  ;
+}
+.title-header  span:nth-child(1){
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+.title-header span:nth-child(2){
+    float: left;
+    width: 50%;
+    text-align: right;
+}
+#addUploadDiv{
+    margin-left: 2%;
+}
+.modal-body {
+    overflow: hidden;
+    /*float: right;
+    width: 78%;*/
+    overflow: auto;
+    height: 86%;
+
+}
+.modal-footer{
+    border: none !important;
+}
+/*关闭X 样式*/
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pluginClass {
+    height: 42px;
+    width: 126px;
+    padding:8px;
+    background-color: #00A2D4;
+    border-color: #00A2D4;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    font-weight: 900;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+.picUpload{
+    margin-top: 5%;
+}
+input[type=radio]{
+    display:block;
+    float: left;
+}
+img{
+    border: 1px solid #cceff5;
+    margin-left:30px;
+    text-align: center;
+}
+.inUse{
+ /*   border: 1px solid #cceff5;*/
+
+    text-align: right;
+    overflow: hidden;
+    width: 100%;
+}
+.ps-lf{
+    float: left;
+    overflow: hidden;
+    width: 10%;
+
+}
+.main-nav {
+    overflow: hidden;
+    float: right;
+    width: 80%;
+}
+.ps-lf>div{
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    /*margin: 35px 0;*/
+}
+.nameType{
+   float: left;
+}
+.modal-footer{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+}
+.modal-footer input {
+    display: inline-block;
+}
+.nameType{
+    font-family: arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;
+}
+.formBlock {
+    margin: 20px;
+    width: 45%;
+    min-height: 310px;
+    padding: 10px;
+    position:relative;
+    background: -webkit-gradient(linear, 0% 20%, 0% 92%, from(#fff), to(#f3f3f3), color-stop(.1,#fff));
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2) ;
+}
+.cancel {
+    background-color: red !important;
+}
+.confirm{
+    background-color: #306dff;
+}
+.addUploadDiv{
+    float: left;
+}
+
+
+
+
+
